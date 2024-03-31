@@ -42,6 +42,8 @@ lerna-debug.log*
 
 # Cloudflare
 functions/**/*.js
+wrangler.toml
+.wrangler
 
 # drizzle
 drizzle/migrations

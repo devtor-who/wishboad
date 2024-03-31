@@ -1,22 +1,16 @@
-// // This is your drizzle schema file.
-
-// import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
-
-// export const users = pgTable("users", {
-//   id: serial("id").primaryKey(),
-//   name: text("name").default("not_provided"),
-//   email: text("email").notNull(),
-// });
-
-// export const schema = {
-//   users,
-// };
-import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
+import { text, integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  name: text("name").default("not_provided"),
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
   email: text("email").notNull(),
+  textModifiers: text("text_modifiers")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  intModifiers: integer("int_modifiers", { mode: "boolean" })
+    .notNull()
+    .default(false),
 });
 
 export const schema = {
